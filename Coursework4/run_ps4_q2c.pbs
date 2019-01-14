@@ -1,0 +1,27 @@
+#!/bin/sh
+
+#### PBS preamble
+
+#PBS -N ps4_q2c
+
+#PBS -M ruwang@umich.edu
+
+#PBS -m abe
+
+#PBS -t 1,2,4
+
+#PBS -l procs=8,mem=4GB,walltime=1:00:00
+
+#PBS -j oe
+
+#PBS -V
+
+#PBS -A stats_flux
+
+#PBS -q flux
+
+#PBS -l qos=flux
+
+path=/home/ruwang/stats506
+
+Rscript --vanilla /$path/ps4_q2c.R sigma=$(echo "${PBS_ARRAYID}*0.25" | bc) ncores=4 mc_rep=1e4 > $path/ps4_q2c_${PBS_ARRAYID}.Rout
